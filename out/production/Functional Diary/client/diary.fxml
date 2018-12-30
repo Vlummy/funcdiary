@@ -1,0 +1,111 @@
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.stage.Screen?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<BorderPane styleClass="PaneStandardStyle" fx:id="diaryBorderPane" fx:controller="client.MainController" xmlns:fx="http://javafx.com/fxml" stylesheets="@main.css">
+    <fx:define>
+        <Screen fx:factory="getPrimary" fx:id="screen" />
+    </fx:define>
+
+    <top>
+        <VBox styleClass="TabPane" minWidth="100.0" spacing="10">
+            <HBox spacing="5">
+                <MenuBar prefWidth="${screen.visualBounds.width}">
+                    <menus>
+                        <Menu text="Menu">
+                            <items>
+                                <MenuItem text="New Day" onAction="#cleanDiary" />
+                                <MenuItem text="Save your day" onAction="#saveDay" />
+                                <MenuItem text="Burn the diary" onAction="#burnDiary" />
+                                <MenuItem text="Exit" onAction="#exitDiary" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <Button onAction="#minimizeWindow" text="-" style="-fx-background-color: #99B5BE; -fx-border-color: none;">
+                </Button>
+                <Button onAction="#exitDiary" text="x" style="-fx-background-color: #99B5BE; -fx-border-color: none;">
+                </Button>
+            </HBox>
+        </VBox>
+    </top>
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Diary">
+                    <BorderPane>
+                        <top>
+
+                        </top>
+                        <center>
+                            <VBox fx:id="editorContainer" spacing="5">
+                                <HBox spacing="5">
+                                    <TextField fx:id="dTitle" promptText="Title" prefWidth="${screen.visualBounds.width}"></TextField>
+                                    <DatePicker fx:id="dPicker" promptText="Select Date" prefWidth="${screen.visualBounds.width}" editable="false"></DatePicker>
+                                    <Button text="Load selected date" onAction="#loadDay" prefWidth="${screen.visualBounds.width}"></Button>
+                                </HBox>
+                                <TextField fx:id="dCrucialExperience" promptText="Crucial Experience: What was it that made your day like this?" prefWidth="${screen.visualBounds.width}"></TextField>
+                                <TextField fx:id="dPersonalExperience" promptText="Personal Experience: Did you experience any new feelings?" prefWidth="${screen.visualBounds.width}"></TextField>
+                                <TextField fx:id="dKnowledgeObtained" promptText="Knowledge Obtained: What have you learned from this?" prefWidth="${screen.visualBounds.width}"></TextField>
+                                <TextArea fx:id="dStoryOfTheDay" wrapText="true" promptText="Write the story of your day.." prefWidth="${screen.visualBounds.width}" prefHeight="${screen.visualBounds.height}"></TextArea>
+                            </VBox>
+                        </center>
+                        <right>
+                            <VBox maxWidth="120">
+                                <Label wrapText="true" fx:id="ratingLabel" styleClass="LabelSize14" prefHeight="${screen.visualBounds.height}"></Label>
+                                <Button styleClass="RateButton" fx:id="rb5" text="5" onAction="#setRating" onMouseClicked="#setRB5SelectColor" prefWidth="${screen.visualBounds.width}" prefHeight="${screen.visualBounds.height}"></Button>
+                                <Button styleClass="RateButton" fx:id="rb4" text="4" onAction="#setRating" onMouseClicked="#setRB4SelectColor" prefWidth="${screen.visualBounds.width}" prefHeight="${screen.visualBounds.height}"></Button>
+                                <Button styleClass="RateButton" fx:id="rb3" text="3" onAction="#setRating" onMouseClicked="#setRB3SelectColor" prefWidth="${screen.visualBounds.width}" prefHeight="${screen.visualBounds.height}"></Button>
+                                <Button styleClass="RateButton" fx:id="rb2" text="2" onAction="#setRating" onMouseClicked="#setRB2SelectColor" prefWidth="${screen.visualBounds.width}" prefHeight="${screen.visualBounds.height}"></Button>
+                                <Button styleClass="RateButton" fx:id="rb1" text="1" onAction="#setRating" onMouseClicked="#setRB1SelectColor" prefWidth="${screen.visualBounds.width}" prefHeight="${screen.visualBounds.height}"></Button>
+                            </VBox>
+                        </right>
+                        <left>
+                            <VBox fx:id="dLeftVBox">
+                                <Label styleClass="LabelSize14" text="How was your day?"></Label>
+                                <ChoiceBox fx:id="daySelector" value="Neutral" onAction="#updateAppDescription" minWidth="100" maxWidth="120" prefWidth="${screen.visualBounds.width}">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="Neutral"/>
+                                            <String fx:value="Good"/>
+                                            <String fx:value="Surprising"/>
+                                            <String fx:value="Exciting"/>
+                                            <String fx:value="Mindful"/>
+                                            <String fx:value="Productive"/>
+                                            <String fx:value="Stressful"/>
+                                            <String fx:value="Bad"/>
+                                            <String fx:value="Sad"/>
+                                            <String fx:value="Boring"/>
+                                            <String fx:value="Lonely"/>
+                                            <String fx:value="Scary"/>
+                                        </FXCollections>
+                                    </items>
+                                </ChoiceBox>
+                            </VBox>
+                        </left>
+                        <bottom>
+                            <Button fx:id="saveButton" text="Save your day" onAction="#saveDay" prefWidth="${screen.visualBounds.width}">
+                            </Button>
+                        </bottom>
+                    </BorderPane>
+                </Tab>
+                <Tab fx:id="funcTab" text="Functionality">
+                    <fx:include source="functionality.fxml" />
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>

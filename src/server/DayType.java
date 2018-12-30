@@ -1,0 +1,5 @@
+package server;
+
+public enum DayType {
+    BAD, BORING, EXCITING, GOOD, LONELY, MINDFUL, NEUTRAL, PRODUCTIVE, SAD, SCARY, STRESSFUL, SURPRISING;
+}

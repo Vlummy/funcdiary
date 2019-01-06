@@ -4,8 +4,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import server.ImageFileChooser;
 
 public class Main extends Application {
     private Draggable draggable = new Draggable();
@@ -16,7 +18,7 @@ public class Main extends Application {
         // Make transparent screen draggable
         draggable.makeDraggable(primaryStage, root);
 
-        Scene landingPage = new Scene(root, 1200, 600);
+        Scene landingPage = new Scene(root, 1600, 800);
 
 
         primaryStage.initStyle(StageStyle.TRANSPARENT);
@@ -26,6 +28,7 @@ public class Main extends Application {
         primaryStage.setTitle("Your Functional Diary");
         primaryStage.setScene(landingPage);
         primaryStage.show();
+
     }
 
 

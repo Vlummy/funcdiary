@@ -1,10 +1,14 @@
 package server;
 
+import javafx.scene.image.Image;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Day implements Serializable {
-    private String type;
+
+    private ArrayList<String> tags;
     private final int maxRateLimit = 5;
     private final int minRateLimit = 1;
     private int rating;
@@ -14,13 +18,11 @@ public class Day implements Serializable {
     private String crucialExperience;
     private String personalExperience;
     private String knowledgeObtained;
+    private String imageOne;
+    private String imageTwo;
 
-    public Day(String type) {
-        this.type = type;
-    }
+    public Day() {
 
-    public String getType() {
-        return this.type;
     }
 
     public void setRating(int rating) {
@@ -81,5 +83,29 @@ public class Day implements Serializable {
 
     public void setKnowledgeObtained(String knowledgeObtained) {
         this.knowledgeObtained = knowledgeObtained;
+    }
+
+    public ArrayList<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(ArrayList<String> tags) {
+        this.tags = tags;
+    }
+
+    public String getImageOne() {
+        return imageOne;
+    }
+
+    public void setImageOne(String imageOne) {
+        this.imageOne = imageOne;
+    }
+
+    public String getImageTwo() {
+        return imageTwo;
+    }
+
+    public void setImageTwo(String imageTwo) {
+        this.imageTwo = imageTwo;
     }
 }

@@ -7,10 +7,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import server.*;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static server.SaveLoadObjectsToFile.loadObject;
@@ -21,8 +28,6 @@ import static server.SaveLoadObjectsToFile.saveObject;
  * Purpose: Controller for the Diary scene
  */
 public class MainController implements Controller {
-    @FXML private Label ratingLabel;
-    @FXML private ChoiceBox daySelector;
     @FXML private DatePicker dPicker;
     @FXML private TextField dCrucialExperience;
     @FXML private TextField dTitle;
@@ -35,16 +40,131 @@ public class MainController implements Controller {
     @FXML private Button rb2;
     @FXML private Button rb1;
     @FXML private Button saveButton;
+    @FXML private TextField tagTextField;
+    @FXML private Label tagWordCountLabel;
+    @FXML private Label enoughTagsLabel;
+    @FXML private ImageView imageViewOne;
+    @FXML private ImageView imageViewTwo;
+    private String imageOnePath;
+    private String imageTwoPath;
     private int rating = 3;
 
-    @FXML private Tab funcTab;
+    @FXML private VBox tagsCollectionPane;
+    private ArrayList<String> tagsList;
+    private ArrayList<String> loadedTagsList;
 
     /**
      * Initialize the scene
      */
     public void initialize() {
-        String selectedDay = daySelector.getValue().toString();
-        ratingLabel.setText("How " + selectedDay.toLowerCase() + " was your day?");
+        this.tagsList = new ArrayList<>();
+        tagTextField.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER) {
+                addTagToCurrentDay(tagsCollectionPane, tagTextField.getText());
+                tagTextField.clear();
+            }
+        });
+
+    }
+
+    private String getImageOne() {
+        String path = "";
+        if(imageOnePath != null) {
+            path = imageOnePath;
+        }
+        return path;
+    }
+
+    private String getImageTwo() {
+        String path = "";
+        if(imageTwoPath != null) {
+            path = imageTwoPath;
+        }
+        return path;
+    }
+
+    private void setImageViewOne(Image image) {
+        this.imageViewOne.setImage(image);
+    }
+
+    private void setImageViewTwo(Image image) {
+        this.imageViewTwo.setImage(image);
+    }
+
+    public void selectImageOne() {
+        ImageFileChooser imageFileChooser = new ImageFileChooser(new FileChooser(), new Stage());
+        Image image = new Image(imageFileChooser.getTargetPath().toString());
+        this.imageViewOne.setImage(image);
+        this.imageOnePath = imageFileChooser.getTargetPath().toString();
+
+    }
+
+    public void selectImageTwo() {
+        ImageFileChooser imageFileChooser = new ImageFileChooser(new FileChooser(), new Stage());
+        Image image = new Image(imageFileChooser.getTargetPath().toString());
+        this.imageViewTwo.setImage(image);
+        this.imageTwoPath = imageFileChooser.getTargetPath().toString();
+    }
+
+    public void resetImageViews() {
+        imageViewOne.setImage(null);
+        imageViewTwo.setImage(null);
+        imageOnePath = "";
+        imageTwoPath = "";
+    }
+
+    public void cleanTagsList() {
+        if(tagsList.size() != 0) {
+            this.tagsList.clear();
+        }
+        if(loadedTagsList != null) {
+            this.loadedTagsList.clear();
+        }
+        if(tagsCollectionPane.getChildren().size() != 0) {
+            this.tagsCollectionPane.getChildren().clear();
+        }
+    }
+
+    public void addTagToList(String tag) {
+        this.tagsList.add(tag);
+    }
+
+    public void validateInputOnTextField() {
+        if(tagTextField.getText().length() == 0) {
+            tagWordCountLabel.setText("");
+        } else {
+            tagWordCountLabel.setText(String.valueOf(tagTextField.getText().length() + 1));
+        }
+        if(tagTextField.getText().length() > 14) {
+            tagWordCountLabel.setText("15");
+            String limit = tagTextField.getText().substring(0, 14);
+            tagTextField.setText(limit);
+            tagTextField.positionCaret(15);
+        }
+    }
+
+    public void addTagToCurrentDay(VBox box,String tag) {
+        if(box.getChildren().size() < 10) {
+            enoughTagsLabel.setText("");
+            Button deleteFunc = new Button("X");
+            deleteFunc.setStyle("-fx-border-width: 0");
+            Button result = new Button(tag, deleteFunc);
+            result.setPrefHeight(20);
+            result.setContentDisplay(ContentDisplay.RIGHT);
+
+            deleteFunc.setOnAction(event -> {
+                box.getChildren().remove(result);
+                if(tagsList.contains(result.getText())) {
+                    tagsList.remove(result.getText());
+                }
+                System.out.println(tagsList);
+            });
+            box.getChildren().add(result);
+            addTagToList(tag);
+            System.out.println(tagsList);
+        } else {
+            enoughTagsLabel.setText("Okay okay, enough for one day");
+        }
     }
 
     public void burnDiary() {
@@ -212,8 +332,10 @@ public class MainController implements Controller {
      * saved days and collections.
      */
     public void cleanDiary() {
+        cleanTagsList();
         resetRatingButtonColoring();
         resetDiaryInputFields();
+        resetImageViews();
     }
 
     /**
@@ -221,7 +343,6 @@ public class MainController implements Controller {
      * Purpose: Reset the input fields of the diary to original prompt text on runtime
      */
     private void resetDiaryInputFields() {
-        this.daySelector.setValue("Neutral");
         this.dTitle.setText("");
         this.dCrucialExperience.setText("");
         this.dPersonalExperience.setText("");
@@ -253,12 +374,13 @@ public class MainController implements Controller {
      * for the day in too the matching fields of the GUI
      */
     public void loadDay() {
+        if(this.tagsList.size() != 0) {
+            cleanTagsList();
+        }
         try {
             DaysCollection dc = (DaysCollection) loadObject("daysCollection.ser");
-            System.out.println(dc.getDayCollection().keySet());
             if(dc.getDay(dPicker.getValue().toString()) != null) {
                 Day day = dc.getDay(dPicker.getValue().toString());
-                this.daySelector.setValue(day.getType());
                 this.dTitle.setText(day.getTitle());
                 this.dPicker.setPromptText(day.getDate().toString());
                 this.dCrucialExperience.setText(day.getCrucialExperience());
@@ -266,6 +388,23 @@ public class MainController implements Controller {
                 this.dKnowledgeObtained.setText(day.getKnowledgeObtained());
                 this.dStoryOfTheDay.setText(day.getRecapStory());
                 this.rating = day.getRating();
+                this.loadedTagsList = day.getTags();
+                System.out.println(day.getImageOne());
+                System.out.println(day.getImageTwo());
+
+                try {
+                    setImageViewOne(new Image(day.getImageOne()));
+                    setImageViewTwo(new Image(day.getImageTwo()));
+                } catch (Exception e) {
+
+                }
+
+                this.imageOnePath = day.getImageOne();
+                this.imageTwoPath = day.getImageTwo();
+
+                for(String tag : loadedTagsList) {
+                    addTagToCurrentDay(tagsCollectionPane, tag);
+                }
 
                 if(rating == 1) {
                     setRB1SelectColor();
@@ -286,6 +425,7 @@ public class MainController implements Controller {
                 cleanDiary();
             }
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Can't find any collection of saved days, or the date is not specified");
         }
     }
@@ -294,49 +434,17 @@ public class MainController implements Controller {
      * Method: saveDay()
      * Purpose: Creates a new day and and possibly a new hashmap collection for storing days iff one not already exits.
      * The new day is saved to the collection by the date as key and day as value.
+     *
+     * IMPORTANT: DOES NOT HAVE PERIOD YET!
      */
     public void saveDay() {
+        System.out.println(imageOnePath);
+        System.out.println(imageTwoPath);
         Task<Void> task = new Task<Void>() {
             @Override public Void call() throws Exception {
                 updateMessage("Saving.");
-                Day day = DayFactory.createDay(DayType.NEUTRAL);
+                Day day = DayFactory.createDay(DayType.SINGLE); // ONLY SINGLE AT THIS MOMENT
                 DaysCollection dc;
-                if(daySelector.getValue().toString().equals("Bad")) {
-                    day = DayFactory.createDay(DayType.BAD);
-                }
-                if(daySelector.getValue().toString().equals("Boring")) {
-                    day = DayFactory.createDay(DayType.BORING);
-                }
-                if(daySelector.getValue().toString().equals("Exciting")) {
-                    day = DayFactory.createDay(DayType.EXCITING);
-                }
-                if(daySelector.getValue().toString().equals("Good")) {
-                    day = DayFactory.createDay(DayType.GOOD);
-                }
-                if(daySelector.getValue().toString().equals("Lonely")) {
-                    day = DayFactory.createDay(DayType.LONELY);
-                }
-                if(daySelector.getValue().toString().equals("Mindful")) {
-                    day = DayFactory.createDay(DayType.MINDFUL);
-                }
-                if(daySelector.getValue().toString().equals("Neutral")) {
-                    day = DayFactory.createDay(DayType.NEUTRAL);
-                }
-                if(daySelector.getValue().toString().equals("Productive")) {
-                    day = DayFactory.createDay(DayType.PRODUCTIVE);
-                }
-                if(daySelector.getValue().toString().equals("Sad")) {
-                    day = DayFactory.createDay(DayType.SAD);
-                }
-                if(daySelector.getValue().toString().equals("Scary")) {
-                    day = DayFactory.createDay(DayType.SCARY);
-                }
-                if(daySelector.getValue().toString().equals("Stressful")) {
-                    day = DayFactory.createDay(DayType.STRESSFUL);
-                }
-                if(daySelector.getValue().toString().equals("Surprising")) {
-                    day = DayFactory.createDay(DayType.SURPRISING);
-                }
                 Thread.sleep(500);
                 updateMessage("Saving..");
                 try {
@@ -356,6 +464,9 @@ public class MainController implements Controller {
                 day.setKnowledgeObtained(dKnowledgeObtained.getText());
                 day.setRecapStory(dStoryOfTheDay.getText());
                 day.setRating(rating);
+                day.setTags(tagsList);
+                day.setImageOne(imageOnePath);
+                day.setImageTwo(imageTwoPath);
 
                 dc.addDay(day.getDate().toString(), day);
 
@@ -376,19 +487,5 @@ public class MainController implements Controller {
         Thread thread = new Thread(task);
         thread.setDaemon(true);
         thread.start();
-    }
-
-    /**
-     * updateAppDescriptio()
-     * Does: Updates the description fields of the diary depending on the selected day
-     * Purpose: Event handler for ChoiceBox
-     */
-    public void updateAppDescription() {
-        // Rating label update
-        String selectedDay = daySelector.getValue().toString().toLowerCase();
-        ratingLabel.setText("How " + selectedDay + " was your day?");
-
-        // Textfield prompt text update
-        dCrucialExperience.setPromptText("Crucial Experience: What was it that made your day " + selectedDay + "?");
     }
 }

@@ -6,6 +6,13 @@
 
 }
 
+#tagsCollectionPane {
+    -fx-border-color: #F1F1F1;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10;
+    -fx-border-insets: 5;
+}
+
 #fBorderPane {
     -fx-padding: 10px;
 }
@@ -211,7 +218,7 @@
 }
 
 .RateButton {
-    -fx-font-size: 36px;
+    -fx-font-size: 16px;
 }
 
 #dLeftVBox {
@@ -266,4 +273,8 @@
 
 #dStoryOfTheDay {
     -fx-font-size: 16px;
+}
+
+.imageContainer {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }

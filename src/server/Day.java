@@ -20,6 +20,8 @@ public class Day implements Serializable {
     private String knowledgeObtained;
     private String imageOne;
     private String imageTwo;
+    private double imageOneRotation;
+    private double imageTwoRotation;
 
     public Day() {
 
@@ -107,5 +109,21 @@ public class Day implements Serializable {
 
     public void setImageTwo(String imageTwo) {
         this.imageTwo = imageTwo;
+    }
+
+    public double getImageOneRotation() {
+        return imageOneRotation;
+    }
+
+    public void setImageOneRotation(double imageOneRotation) {
+        this.imageOneRotation = imageOneRotation;
+    }
+
+    public double getImageTwoRotation() {
+        return imageTwoRotation;
+    }
+
+    public void setImageTwoRotation(double imageTwoRotation) {
+        this.imageTwoRotation = imageTwoRotation;
     }
 }

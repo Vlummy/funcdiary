@@ -31,7 +31,7 @@ public class ImageFileChooser {
         // Move selected file to resource folder
         if(file != null) {
             Path moveFrom = FileSystems.getDefault().getPath(file.getPath());
-            this.target = Paths.get("resources/" + file.getName());
+            this.target = Paths.get("src","resources/" + file.getName());
             try {
                 Files.copy(moveFrom, getTargetPath());
             } catch (IOException e) {

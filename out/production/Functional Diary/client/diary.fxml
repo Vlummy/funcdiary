@@ -12,20 +12,19 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.geometry.Pos?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
 <BorderPane styleClass="PaneStandardStyle" fx:id="diaryBorderPane" fx:controller="client.MainController" xmlns:fx="http://javafx.com/fxml" stylesheets="@main.css">
     <fx:define>
         <Screen fx:factory="getPrimary" fx:id="screen" />
     </fx:define>
 
     <top>
-        <VBox styleClass="TabPane" minWidth="100.0" spacing="10">
-            <HBox spacing="5">
-                <MenuBar prefWidth="${screen.visualBounds.width}">
+        <VBox styleClass="MenuBar">
+            <HBox>
+                <MenuBar>
                     <menus>
                         <Menu text="Menu">
                             <items>
@@ -37,71 +36,97 @@
                         </Menu>
                     </menus>
                 </MenuBar>
-                <Button onAction="#minimizeWindow" text="-" style="-fx-background-color: #99B5BE; -fx-border-color: none;">
-                </Button>
-                <Button onAction="#exitDiary" text="x" style="-fx-background-color: #99B5BE; -fx-border-color: none;">
-                </Button>
+                <HBox style="-fx-background-color: #99B5BE;" HBox.hgrow="ALWAYS" />
+                <Button styleClass="MenuBarButtons" onAction="#minimizeWindow" text="-" />
+                <Button styleClass="MenuBarButtons" onAction="#exitDiary" text="x" />
             </HBox>
         </VBox>
     </top>
     <center>
-        <TabPane tabClosingPolicy="UNAVAILABLE">
+        <TabPane styleClass="TabPane" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Diary">
-                    <BorderPane>
+                    <BorderPane styleClass="TabPaneContainer">
                         <top>
 
                         </top>
                         <center>
                             <VBox fx:id="editorContainer" spacing="5">
                                 <HBox spacing="5">
-                                    <TextField fx:id="dTitle" promptText="Title" prefWidth="${screen.visualBounds.width}"></TextField>
-                                    <DatePicker fx:id="dPicker" promptText="Select Date" prefWidth="${screen.visualBounds.width}" editable="false"></DatePicker>
-                                    <Button text="Load selected date" onAction="#loadDay" prefWidth="${screen.visualBounds.width}"></Button>
+                                    <TextField fx:id="dTitle" promptText="Title" HBox.hgrow="ALWAYS"></TextField>
+                                    <DatePicker fx:id="dPicker" promptText="Select Date" editable="false" HBox.hgrow="ALWAYS"></DatePicker>
+                                    <Button text="Load selected date" onAction="#loadDay" HBox.hgrow="ALWAYS"></Button>
                                 </HBox>
-                                <TextField fx:id="dCrucialExperience" promptText="Crucial Experience: What was it that made your day like this?" prefWidth="${screen.visualBounds.width}"></TextField>
-                                <TextField fx:id="dPersonalExperience" promptText="Personal Experience: Did you experience any new feelings?" prefWidth="${screen.visualBounds.width}"></TextField>
-                                <TextField fx:id="dKnowledgeObtained" promptText="Knowledge Obtained: What have you learned from this?" prefWidth="${screen.visualBounds.width}"></TextField>
-                                <TextArea fx:id="dStoryOfTheDay" wrapText="true" promptText="Write the story of your day.." prefWidth="${screen.visualBounds.width}" prefHeight="${screen.visualBounds.height}"></TextArea>
+                                <TextField fx:id="dCrucialExperience" promptText="Crucial Experience: What was it that made your day like this?" HBox.hgrow="ALWAYS"></TextField>
+                                <TextField fx:id="dPersonalExperience" promptText="Personal Experience: Did you experience any new feelings?" HBox.hgrow="ALWAYS"></TextField>
+                                <TextField fx:id="dKnowledgeObtained" promptText="Knowledge Obtained: What have you learned from this?" HBox.hgrow="ALWAYS"></TextField>
+                                <TextArea fx:id="dStoryOfTheDay" wrapText="true" promptText="Write the story of your day.." HBox.hgrow="ALWAYS"></TextArea>
                             </VBox>
                         </center>
+
+
+
+
+
+
                         <right>
-                            <VBox spacing="10" style="-fx-padding: 15" prefWidth="450">
-                                <StackPane styleClass="imageContainer" alignment="CENTER">
+                            <VBox spacing="5" style="-fx-padding: 5">
+
+                                <StackPane prefHeight="250" prefWidth="450" fx:id="imageContainerOne" styleClass="imageContainer" alignment="CENTER" onMouseClicked="#selectImageOne">
+                                    <Label>
+                                        <graphic>
+                                            <ImageView>
+                                                <Image url="@../resources/image-icon.png" />
+                                            </ImageView>
+                                        </graphic>
+                                    </Label>
                                     <ImageView fx:id="imageViewOne" fitHeight="250" fitWidth="450" preserveRatio="true" />
                                 </StackPane>
-                                <Button fx:id="selectImageButtonOne" text="Select Image" onAction="#selectImageOne"/>
+
                                 <VBox VBox.vgrow="ALWAYS" />
-                                <StackPane styleClass="imageContainer" alignment="CENTER">
+
+                                <StackPane prefHeight="250" prefWidth="450" fx:id="imageContainerTwo" styleClass="imageContainer" alignment="CENTER" onMouseClicked="#selectImageTwo">
+                                    <Label>
+                                        <graphic>
+                                            <ImageView>
+                                                <Image url="@../resources/image-icon.png" />
+                                            </ImageView>
+                                        </graphic>
+                                    </Label>
                                     <ImageView fx:id="imageViewTwo" fitHeight="250" fitWidth="450" preserveRatio="true" />
                                 </StackPane>
-                                <Button fx:id="selectImageButtonTwo" text="Select Image" onAction="#selectImageTwo"/>
+
                             </VBox>
                         </right>
+
+
+
+
+
+
                         <left>
-                            <VBox fx:id="tagPaneRoot" spacing="5" style="-fx-padding: 5">
+                            <VBox fx:id="tagPaneRoot" spacing="5" style="-fx-padding: 0 5 0 0">
                                 <HBox spacing="5">
-                                    <TextField fx:id="tagTextField" onKeyTyped="#validateInputOnTextField" promptText="Tag name - ENTER to add" />
-                                    <Label fx:id="tagWordCountLabel" style="-fx-min-width: 20; -fx-max-width: 20"/>
+                                    <TextField fx:id="tagTextField" onKeyTyped="#validateInputOnTextField" promptText="TagTagTag" />
                                 </HBox>
-                                <VBox fx:id="tagsCollectionPane" spacing="5" style="-fx-border-width: 0">
+                                <VBox fx:id="tagsCollectionPane" spacing="5" style="-fx-border-width: 0; -fx-padding: 10">
 
                                 </VBox>
                                 <Label fx:id="enoughTagsLabel" />
+                                <VBox VBox.vgrow="ALWAYS" />
+                                <Label fx:id="tagWordCountLabel" />
                             </VBox>
 
                         </left>
                         <bottom>
-                            <HBox spacing="5">
+                            <HBox fx:id="bottomLayout" spacing="5">
                                 <Button fx:id="saveButton" text="Save your day" onAction="#saveDay" />
-                                <HBox HBox.hgrow="ALWAYS">
-                                </HBox>
-                                <Label wrapText="true" text="Give your day a score" fx:id="ratingLabel" styleClass="LabelSize14" />
-                                <Button styleClass="RateButton" fx:id="rb1" text="1" onAction="#setRating" onMouseClicked="#setRB1SelectColor" />
-                                <Button styleClass="RateButton" fx:id="rb2" text="2" onAction="#setRating" onMouseClicked="#setRB2SelectColor" />
-                                <Button styleClass="RateButton" fx:id="rb3" text="3" onAction="#setRating" onMouseClicked="#setRB3SelectColor" />
-                                <Button styleClass="RateButton" fx:id="rb4" text="4" onAction="#setRating" onMouseClicked="#setRB4SelectColor" />
-                                <Button styleClass="RateButton" fx:id="rb5" text="5" onAction="#setRating" onMouseClicked="#setRB5SelectColor" />
+                                <HBox HBox.hgrow="ALWAYS" />
+                                <Button styleClass="RateButton" text="1" fx:id="rb1" onAction="#setRating" onMouseClicked="#setRB1SelectColor" />
+                                <Button styleClass="RateButton" text="2" fx:id="rb2" onAction="#setRating" onMouseClicked="#setRB2SelectColor" />
+                                <Button styleClass="RateButton" text="3" fx:id="rb3" onAction="#setRating" onMouseClicked="#setRB3SelectColor" />
+                                <Button styleClass="RateButton" text="4" fx:id="rb4" onAction="#setRating" onMouseClicked="#setRB4SelectColor" />
+                                <Button styleClass="RateButton" text="5" fx:id="rb5" onAction="#setRating" onMouseClicked="#setRB5SelectColor" />
                             </HBox>
                         </bottom>
                     </BorderPane>

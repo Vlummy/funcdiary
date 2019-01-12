@@ -5,14 +5,15 @@
 <BorderPane fx:id="fBorderPane" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="client.FuncController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="400.0" prefWidth="600.0"
+            styleClass="TabPaneContainer">
 
     <top>
 
     </top>
 
     <left>
-        <HBox spacing="5">
+        <HBox spacing="5" style="-fx-padding: 10">
             <VBox styleClass="DataList" spacing="2">
                 <Label styleClass="LabelSize14NoPadding" text="Count"/>
                 <Label fx:id="dayCount" />
@@ -28,14 +29,16 @@
     <center>
         <BorderPane>
             <top>
-                <HBox>
-                    <TextField fx:id="chartYearField" promptText="Enter year..." onKeyTyped="#validateNumbers" />
-                    <Button text="Update" onAction="#createMonthAverageAxis" />
-                </HBox>
+
             </top>
             <center>
-                <Group fx:id="lineChartContainer">
-                </Group>
+                <VBox alignment="CENTER" style="-fx-border-width: 0 0 0 1; -fx-border-color: #4d4d4d">
+                    <HBox alignment="CENTER">
+                        <TextField fx:id="chartYearField" promptText="Enter year..." onKeyTyped="#validateNumbers" />
+                        <Button text="Update" onAction="#createMonthAverageAxis" />
+                    </HBox>
+                    <Group fx:id="lineChartContainer" />
+                </VBox>
             </center>
         </BorderPane>
     </center>

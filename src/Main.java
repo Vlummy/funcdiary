@@ -18,7 +18,7 @@ public class Main extends Application {
         // Make transparent screen draggable
         draggable.makeDraggable(primaryStage, root);
 
-        Scene landingPage = new Scene(root, 1600, 800);
+        Scene landingPage = new Scene(root);
 
 
         primaryStage.initStyle(StageStyle.TRANSPARENT);

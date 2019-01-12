@@ -5,12 +5,13 @@ import javafx.animation.ScaleTransition;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -45,6 +46,8 @@ public class MainController implements Controller {
     @FXML private Label enoughTagsLabel;
     @FXML private ImageView imageViewOne;
     @FXML private ImageView imageViewTwo;
+    @FXML private StackPane imageContainerOne;
+    @FXML private StackPane imageContainerTwo;
     private String imageOnePath;
     private String imageTwoPath;
     private int rating = 3;
@@ -52,6 +55,9 @@ public class MainController implements Controller {
     @FXML private VBox tagsCollectionPane;
     private ArrayList<String> tagsList;
     private ArrayList<String> loadedTagsList;
+
+    private Button rotateImageOne;
+    private Button rotateImageTwo;
 
     /**
      * Initialize the scene
@@ -64,7 +70,66 @@ public class MainController implements Controller {
                 tagTextField.clear();
             }
         });
+        setTheRotateButtons();
 
+        setRotateButtons(rotateImageOne, imageViewOne, imageContainerOne);
+        setRotateButtons(rotateImageTwo, imageViewTwo, imageContainerTwo);
+
+        rb1.setTooltip(new Tooltip("Rate your day 1"));
+        rb2.setTooltip(new Tooltip("Rate your day 2"));
+        rb3.setTooltip(new Tooltip("Rate your day 3"));
+        rb4.setTooltip(new Tooltip("Rate your day 4"));
+        rb5.setTooltip(new Tooltip("Rate your day 5"));
+
+        saveButton.setTooltip(new Tooltip("Saves your day to the selected date"));
+        tagTextField.setTooltip(new Tooltip("Write your tag and press Enter"));
+
+
+
+    }
+
+    /**
+     * Method: Sets the rotate function and scales the selected image view to fit size
+     * @param rotateButton
+     * @param imageView
+     * @param imageContainer
+     */
+    private void setRotateButtons(Button rotateButton, ImageView imageView, StackPane imageContainer) {
+        rotateButton.setOnAction(event -> {
+            rotateImage90(imageView, imageView.getRotate() + 90);
+            scaleImageToFit(imageView, imageContainer);
+        });
+    }
+
+    private void rotateImage90(ImageView imageView, double v) {
+        imageView.setRotate(v);
+    }
+
+    private void scaleImageToFit(ImageView imageView, StackPane imageContainer) {
+        if(imageView.getRotate() == 90 || imageView.getRotate() == 270) {
+            imageView.setFitWidth(imageContainer.getHeight());
+            imageView.setFitHeight(imageContainer.getWidth());
+        } else {
+            imageView.setFitWidth(450);
+            imageView.setFitHeight(250);
+        }
+        if(imageView.getRotate() == 360) {
+            rotateImage90(imageView, 0);
+        }
+    }
+
+    private void setTheRotateButtons() {
+        rotateImageOne = new Button();
+        rotateImageOne.setGraphic(new ImageView(new Image("resources/rotate-icon.png")));
+        rotateImageOne.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
+        rotateImageTwo = new Button();
+        rotateImageTwo.setGraphic(new ImageView(new Image("resources/rotate-icon.png")));
+        rotateImageTwo.setStyle("-fx-background-color: rgba(0, 0, 0, 0)");
+
+        imageContainerOne.getChildren().add(rotateImageOne);
+        imageContainerTwo.getChildren().add(rotateImageTwo);
+        imageContainerOne.setAlignment(rotateImageOne, Pos.TOP_RIGHT);
+        imageContainerTwo.setAlignment(rotateImageTwo, Pos.TOP_RIGHT);
     }
 
     private String getImageOne() {
@@ -94,7 +159,7 @@ public class MainController implements Controller {
     public void selectImageOne() {
         ImageFileChooser imageFileChooser = new ImageFileChooser(new FileChooser(), new Stage());
         Image image = new Image(imageFileChooser.getTargetPath().toString());
-        this.imageViewOne.setImage(image);
+        setImageViewOne(image);
         this.imageOnePath = imageFileChooser.getTargetPath().toString();
 
     }
@@ -102,13 +167,21 @@ public class MainController implements Controller {
     public void selectImageTwo() {
         ImageFileChooser imageFileChooser = new ImageFileChooser(new FileChooser(), new Stage());
         Image image = new Image(imageFileChooser.getTargetPath().toString());
-        this.imageViewTwo.setImage(image);
+        setImageViewTwo(image);
         this.imageTwoPath = imageFileChooser.getTargetPath().toString();
     }
 
     public void resetImageViews() {
         imageViewOne.setImage(null);
         imageViewTwo.setImage(null);
+        imageViewOne.setFitHeight(250);
+        imageViewTwo.setFitWidth(450);
+        imageViewTwo.setFitHeight(250);
+        imageViewOne.setFitWidth(450);
+        imageContainerOne.setPrefHeight(250);
+        imageContainerOne.setPrefWidth(450);
+        imageContainerTwo.setPrefHeight(250);
+        imageContainerTwo.setPrefWidth(450);
         imageOnePath = "";
         imageTwoPath = "";
     }
@@ -144,11 +217,12 @@ public class MainController implements Controller {
     }
 
     public void addTagToCurrentDay(VBox box,String tag) {
-        if(box.getChildren().size() < 10) {
+        if(box.getChildren().size() < 9) {
             enoughTagsLabel.setText("");
-            Button deleteFunc = new Button("X");
-            deleteFunc.setStyle("-fx-border-width: 0");
+            Button deleteFunc = new Button("x");
+            deleteFunc.setStyle("-fx-border-width: 0; -fx-background-color: #afc7ce;");
             Button result = new Button(tag, deleteFunc);
+            result.setStyle("-fx-background-color: #afc7ce; -fx-border-color: #88979b; -fx-border-radius: 10; -fx-background-radius: 10;");
             result.setPrefHeight(20);
             result.setContentDisplay(ContentDisplay.RIGHT);
 
@@ -163,7 +237,7 @@ public class MainController implements Controller {
             addTagToList(tag);
             System.out.println(tagsList);
         } else {
-            enoughTagsLabel.setText("Okay okay, enough for one day");
+            enoughTagsLabel.setText("Okay okay, enough!");
         }
     }
 
@@ -399,6 +473,13 @@ public class MainController implements Controller {
 
                 }
 
+                imageViewOne.setRotate(day.getImageOneRotation());
+                imageViewTwo.setRotate(day.getImageTwoRotation());
+                System.out.println(imageViewOne.getRotate());
+                System.out.println(imageViewTwo.getRotate());
+                scaleImageToFit(imageViewOne,imageContainerOne);
+                scaleImageToFit(imageViewTwo,imageContainerTwo);
+
                 this.imageOnePath = day.getImageOne();
                 this.imageTwoPath = day.getImageTwo();
 
@@ -467,6 +548,8 @@ public class MainController implements Controller {
                 day.setTags(tagsList);
                 day.setImageOne(imageOnePath);
                 day.setImageTwo(imageTwoPath);
+                day.setImageOneRotation(imageViewOne.getRotate());
+                day.setImageTwoRotation(imageViewTwo.getRotate());
 
                 dc.addDay(day.getDate().toString(), day);
 

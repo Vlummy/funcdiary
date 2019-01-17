@@ -2,39 +2,45 @@ package timeline;
 
 import server.Day;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.*;
 
 /**
  * Domain spesific class for this app (Functional Diary)
- * This class takes in a ArrayList of containing days from the Day class and sets the different fields needed
+ * This class takes in a ArrayList that contains days from the Day class and sets the different fields needed
  * to always keep track of the current, previous and next date in line when scrolling through the
  * the cards a timeline displays.
  *
  * This class implements LoaderInterface to handle the main controls of loading and updating these
  * fields in a correct manner.
+ *
+ * Author: Øyvind Johannessen
+ * Version: 1.0
  */
-public class DayLoader implements LoaderInterface {
+public class DayLoader implements LoaderInterface<Day, LocalDate> {
 
     // Fields for this class
     private ArrayList<Day> daysList;
-    private String selectedDate = null;
-    private String currentLoadedDate = null;
-    private String previousDate = null;
-    private String nextDate = null;
-
-    /**
-     * Constructor: Empty
-     */
-    public DayLoader() {}
+    private LocalDate selectedDate = null;
+    private LocalDate currentLoadedDate = null;
+    private LocalDate previousDate = null;
+    private LocalDate nextDate = null;
 
     /**
      * Constructor: builds a initial loader state where current loaded date is set to newest entry
      * and then previous and next date is also set if there are any.
-     * @param daysList
+     * @param daysCollection
      */
-    public DayLoader(ArrayList<Day> daysList) {
-        this.daysList = daysList;
-        this.loadNewestEntry();
+    public DayLoader(HashMap<String, Day> daysCollection) {
+        setDaysList(daysCollection);
+        loadNewestEntry();
+    }
+
+    /**
+     * Sort the list so that previous and next date is correct
+     */
+    private void sortList() {
+        getDaysList().sort(Comparator.comparing(Day::getDate));
     }
 
     @Override
@@ -69,92 +75,121 @@ public class DayLoader implements LoaderInterface {
 
     @Override
     public void loadNewestEntry() {
-        // Set currentLoadedDate to newest entry ( filter the newest date of all the days )
+        try {
+            // Set currentLoadedDate to newest entry ( filter the newest date of all the days )
+            LocalDate newestDate = getDaysList().stream().map(day -> day.getDate()).max(LocalDate::compareTo).get();
+            setCurrentLoadedDate(newestDate);
+            // Set previousDate
+            setPreviousDate();
+            // Set nextDate
+            setNextDate();
+            // Set selectedEntry
+            setSelectedDate(getCurrentLoadedDate());
+        } catch (NoSuchElementException e) {
 
-        // Set previousDate ( uses currentLoadedDate )
-
-        // Set nextDate ( uses currentLoadedDate )
-
-        // Set selectedEntry ( uses currentLoadedDate )
+        }
     }
 
     @Override
-    public void loadSpecificEntry() {
-        // If hasSpecific
-
-        // Set currentLoadedDate ( from selectedDate )
-
-        // Set previousDate ( uses currentLoadedDate )
-
-        // Set nextDate ( uses currentLoadedDate )
+    public void loadSpecificEntry(LocalDate date) {
+        // Set selected date
+        setSelectedDate(date);
+        if(hasSpecific()) {
+            // Set currentLoadedDate ( from selectedDate )
+            setCurrentLoadedDate(getSelectedDate());
+            // Set previousDate ( uses currentLoadedDate )
+            setPreviousDate();
+            // Set nextDate ( uses currentLoadedDate )
+            setNextDate();
+        }
     }
 
     @Override
     public void loadPreviousEntry() {
         // If hasPrevious
-
-        // Set currentLoadedDate ( from previousDate )
-
-        // Set previousDate ( uses currentLoadedDate )
-
-        // Set nextDate ( uses currentLoadedDate )
-
-        // Set selectedEntry ( uses currentLoadedDate )
+        if(hasPrevious()) {
+            // Set currentLoadedDate ( from previousDate )
+            setCurrentLoadedDate(getPreviousDate());
+            // Set previousDate ( uses currentLoadedDate )
+            setPreviousDate();
+            // Set nextDate ( uses currentLoadedDate )
+            setNextDate();
+            // Set selectedEntry ( uses currentLoadedDate )
+        }
     }
 
     @Override
     public void loadNextEntry() {
         // If hasNext
+        if(hasNext()) {
+            // Set currentLoadedDate ( from nextDate )
+            setCurrentLoadedDate(getNextDate());
+            // Set previousDate
+            setPreviousDate();
+            // Set nextDate
+            setNextDate();
+            // Set selectedEntry
+        }
+    }
 
-        // Set currentLoadedDate ( from nextDate )
-
-        // Set previousDate ( uses currentLoadedDate )
-
-        // Set nextDate ( uses currentLoadedDate )
-
-        // Set selectedEntry ( uses currentLoadedDate )
+    @Override
+    public Day getEntry() {
+        // Find the correct day in the daysList ( Uses currentLoadedDate )
+        Day day = null;
+        for(Day item : getDaysList()) {
+            if(item.getDate().equals(getCurrentLoadedDate()))
+                day = item;
+        }
+        // Return it
+        return day;
     }
 
     /**
      * Get daysList
      * @return daysList
+     * This method is private because loader should only handle and return one day at a time
      */
-    public ArrayList<Day> getDaysList() {
+    private ArrayList<Day> getDaysList() {
         return daysList;
     }
 
     /**
      * Set daysList
      * @param daysList
+     * This method is private because loader should only deal with one list at a time
      */
-    public void setDaysList(ArrayList<Day> daysList) {
-        this.daysList = daysList;
+    private void setDaysList(HashMap<String, Day> daysList) {
+        this.daysList = new ArrayList<>();
+        getDaysList().addAll(daysList.values());
+        sortList();
     }
 
     /**
      * Get selectedDate
      * @return
      */
-    public String getSelectedDate() {
+    public LocalDate getSelectedDate() {
         return selectedDate;
     }
 
     /**
      * Set selectedDate
-     * @param selectedDate
+     * @param date
      */
-    public void setSelectedDate(String selectedDate) {
+    public void setSelectedDate(LocalDate date) {
         // If day list item has selected date, set the date
-
-        // If not, set to null
-        this.selectedDate = selectedDate;
+        for(Day day : getDaysList()) {
+            if(day.getDate().equals(date)) {
+                this.selectedDate = date;
+            }
+        }
     }
 
     /**
      * Get the current loaded date
      * @return currentLoadedDate
      */
-    public String getCurrentLoadedDate() {
+    public LocalDate getCurrentLoadedDate() {
         return currentLoadedDate;
     }
 
@@ -163,7 +198,7 @@ public class DayLoader implements LoaderInterface {
      * @param currentLoadedDate
      * This method is private because only the override methods should be able to update certain field
      */
-    private void setCurrentLoadedDate(String currentLoadedDate) {
+    private void setCurrentLoadedDate(LocalDate currentLoadedDate) {
         this.currentLoadedDate = currentLoadedDate;
     }
 
@@ -171,7 +206,7 @@ public class DayLoader implements LoaderInterface {
      * Get the current loaded previous date
      * @return previousDate
      */
-    public String getPreviousDate() {
+    public LocalDate getPreviousDate() {
         return previousDate;
     }
 
@@ -180,20 +215,23 @@ public class DayLoader implements LoaderInterface {
      * This method is private because only the override methods should be able to update certain field
      */
     private void setPreviousDate() {
-        // Decrement currentLoadedDate by 1 into a new variable
-
-        // Check if decremented date is available in the list
-
-        // If available, set previousDate to decremented date
-
-        // If not, set previousDate to null
+        // Find newest date before current loaded date
+        for(int i = 0; i < getDaysList().size(); i++) {
+            if(getDaysList().get(i).getDate().equals(getCurrentLoadedDate())) {
+                try {
+                    this.previousDate = getDaysList().get(i - 1).getDate();
+                } catch (IndexOutOfBoundsException e) {
+                    // Do nothing, and keep previous date as null
+                }
+            }
+        }
     }
 
     /**
      * Get the current loaded next date
      * @return nextDate
      */
-    public String getNextDate() {
+    public LocalDate getNextDate() {
         return nextDate;
     }
 
@@ -203,11 +241,14 @@ public class DayLoader implements LoaderInterface {
      */
     private void setNextDate() {
         // Increment currentLoadedDate by 1 into a new variable
-
-        // Check if incremented date is available in the list
-
-        // If available, set nextDate to incremented date
-
-        // If not, set nextDate to null
+        for(int i = 0; i < getDaysList().size(); i++) {
+            if(getDaysList().get(i).getDate().equals(getCurrentLoadedDate())) {
+                try {
+                    this.nextDate = getDaysList().get(i + 1).getDate();
+                } catch (IndexOutOfBoundsException e) {
+                    // Do nothing, and keep next date as null
+                }
+            }
+        }
     }
 }

@@ -6,8 +6,14 @@ package timeline;
  * It is meant to be used on a set of values where an identifier like a index og a date can identify when an entry was
  * put
  * Any class that implements LoderInterface should handle some sort of list.
+ *
+ * T is usually the type of object that is being handled in the list
+ * E is usually a type of identifier to identify the objects when loading a specific entry
+ *
+ * Author: Øyvind Johannessen
+ * Version: 1.0
  */
-public interface LoaderInterface {
+public interface LoaderInterface<T, E> {
     /**
      * Checks if specific field has value
      * Usually uses a field in the domain specific class that will indicate availability
@@ -37,7 +43,7 @@ public interface LoaderInterface {
     /**
      * Loads a specific entry
      */
-    void loadSpecificEntry();
+    void loadSpecificEntry(E entry);
 
     /**
      * Loads the entry that lies before the current loaded entry
@@ -48,4 +54,10 @@ public interface LoaderInterface {
      * Loads the entry that lies next to the current loaded entry
      */
     void loadNextEntry();
+
+    /**
+     * Returns the actual entry that is currently loaded
+     * @return
+     */
+    T getEntry();
 }

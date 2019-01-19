@@ -11,12 +11,18 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import server.*;
+import timeline.backend.Timeline;
+import timeline.frontend.BackCardView;
+import timeline.frontend.FrontCardView;
+import timeline.frontend.TimelineFactory;
+import timeline.frontend.TimelineView;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -48,6 +54,7 @@ public class MainController implements Controller {
     @FXML private ImageView imageViewTwo;
     @FXML private StackPane imageContainerOne;
     @FXML private StackPane imageContainerTwo;
+    @FXML private Tab diaryTab;
     private String imageOnePath;
     private String imageTwoPath;
     private int rating = 3;
@@ -83,9 +90,6 @@ public class MainController implements Controller {
 
         saveButton.setTooltip(new Tooltip("Saves your day to the selected date"));
         tagTextField.setTooltip(new Tooltip("Write your tag and press Enter"));
-
-
-
     }
 
     /**

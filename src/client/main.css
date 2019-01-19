@@ -4,6 +4,30 @@
     -fx-fill: white;
 }
 
+/* TimelineView style */
+#TimelineView {
+    -fx-background-color: #99B5BE;
+}
+#FrontCardView {
+    -fx-background-color: white;
+    -fx-padding: 5 30 5 30;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-text-fill: white;
+}
+#BackCardView {
+    -fx-background-color: white;
+    -fx-padding: 5 30 5 30;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+#TimelineCardContainer {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
 .button {
     -fx-background-color: #99B5BE;
     -fx-text-fill: white;
@@ -114,59 +138,6 @@
     -fx-text-fill: #ddd;
 }
 
-/*.root {
-    -fx-font-family: "Comic Sans MS";
-    -fx-font-size: 12px;
-    -fx-background-color: #99B5BE;
-    -fx-background-radius: 3;
-
-}
-
-#tagsCollectionPane {
-    -fx-border-color: #F1F1F1;
-    -fx-border-width: 1px;
-    -fx-border-radius: 10;
-    -fx-border-insets: 5;
-}
-
-#fBorderPane {
-    -fx-padding: 10px;
-}
-
-.MenuBarIcon:hover {
-    -fx-fill: #7AA3B1;
-}
-
-.tab-pane {
-    -fx-background-color: #99B5BE;
-}
-
-.tab-pane .tab-header-background {
-    -fx-background-color: #99B5BE;
-    -fx-background-radius: 3;
-    -fx-border-radius: 3;
-}
-
-.tab {
-    -fx-background-color: #7AA3B1;
-}
-
-.tab:selected {
-    -fx-background-color: #99B5BE;
-    -fx-text-fill: white;
-    -fx-border-color: #7AA3B1;
-    -fx-border-radius: 3;
-}
-
-.tab-label {
-    -fx-text-fill: white;
-}
-
-.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
-    -fx-border-style: none;
-    -fx-border-color: none;
-}
-*/
 .date-picker {
     -fx-background-color: #99B5BE;
     -fx-border-color: white;
@@ -261,141 +232,6 @@
     -fx-border-radius: 3;
     -fx-background-radius: 3;
 }
-
-/*
-
-.label {
-    -fx-text-fill: white;
-}
-
-.menu-item:focused {
-    -fx-background-color: #99B5BE;
-}
-
-.menu-bar {
-    -fx-background-color: #99B5BE;
-}
-
-.menu-bar .menu-button {
-    -fx-background-color: #99B5BE;
-    -fx-background-radius: 3;
-}
-
-.menu-bar .menu-button:hover {
-    -fx-background-color: #7AA3B1;
-    -fx-background-radius: 3;
-}
-
-.menu-item:focused .label {
-    -fx-text-fill: white;
-}
-
-.context-menu {
-    -fx-background-color: #7AA3B1;
-    -fx-border-color: white;
-    -fx-border-radius: 3;
-}
-
-.choice-box {
-    -fx-background-color: #7AA3B1;
-    -fx-border-color: white;
-    -fx-border-radius: 3;
-}
-
-#diaryBorderPane {
-    -fx-padding: 5px;
-}
-
-#editorContainer {
-    -fx-padding: 5px;
-}
-
-.TabButton {
-    -fx-font-size: 16px;
-}
-
-!*Square and no border outline on buttons*!
-.button:focused {
-    -fx-border-color: white;
-    -fx-background-color: #7AA3B1;
-    -fx-background-radius: 3;
-    -fx-border-radius: 3;
-    -fx-text-fill: white;
-}
-
-.button:hover {
-    -fx-border-color: white;
-    -fx-background-color: #8EB0BB;
-    -fx-background-radius: 3;
-    -fx-border-radius: 3;
-    -fx-text-fill: white;
-}
-
-.button {
-    -fx-border-color: white;
-    -fx-background-color: #7AA3B1;
-    -fx-background-radius: 3;
-    -fx-border-radius: 3;
-    -fx-text-fill: white;
-}
-
-.RateButton {
-    -fx-font-size: 16px;
-}
-
-#dLeftVBox {
-    -fx-padding: 5;
-}
-
-.LabelSize14 {
-    -fx-font-size: 14px;
-    -fx-padding: 2px;
-}
-
-.DataList {
-    -fx-padding: 5px;
-    -fx-border-color: white;
-
-}
-
-.chart .label {
-    -fx-text-fill: white;
-}
-
-.chart {
-    -fx-padding: 10px;
-    -fx-background-color: #99B5BE;
-}
-
-.chart-plot-background {
-    -fx-background-color: #99B5BE;
-}
-
-.chart-content {
-    -fx-padding: 10px;
-}
-
-.chart-legend {
-    -fx-background-color:  transparent;
-    -fx-padding: 20px;
-}
-
-.LabelSize14NoPadding {
-    -fx-font-size: 14px;
-    -fx-underline: true;
-}
-
-#ratingLabel {
-    -fx-padding: 5;
-}
-
-#saveButton {
-    -fx-font-size: 16px;
-}
-
-#dStoryOfTheDay {
-    -fx-font-size: 16px;
-}*/
 
 .imageContainer {
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);

@@ -16,6 +16,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.Image?>
+<?import timeline.frontend.TimelineView?>
+<?import timeline.frontend.TimelineFactory?>
 <BorderPane styleClass="PaneStandardStyle" fx:id="diaryBorderPane" fx:controller="client.MainController" xmlns:fx="http://javafx.com/fxml" stylesheets="@main.css">
     <fx:define>
         <Screen fx:factory="getPrimary" fx:id="screen" />
@@ -45,7 +47,10 @@
     <center>
         <TabPane styleClass="TabPane" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="Diary">
+                <Tab text="Diary" fx:id="diaryTab">
+                    <TimelineFactory fx:factory="instanceNoStyle" />
+                </Tab>
+                <Tab text="Editor">
                     <BorderPane styleClass="TabPaneContainer">
                         <top>
 

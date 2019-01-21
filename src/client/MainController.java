@@ -54,7 +54,7 @@ public class MainController implements Controller {
     @FXML private ImageView imageViewTwo;
     @FXML private StackPane imageContainerOne;
     @FXML private StackPane imageContainerTwo;
-    @FXML private Tab diaryTab;
+    @FXML private TimelineView timelineView;
     private String imageOnePath;
     private String imageTwoPath;
     private int rating = 3;

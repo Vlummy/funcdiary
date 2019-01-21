@@ -5,23 +5,23 @@
 }
 
 /* TimelineView style */
-#TimelineView {
+#timelineView {
     -fx-background-color: #99B5BE;
 }
-#FrontCardView {
+#frontCardView {
     -fx-background-color: white;
     -fx-padding: 5 30 5 30;
     -fx-background-radius: 8;
     -fx-border-radius: 8;
     -fx-text-fill: white;
 }
-#BackCardView {
+#backCardView {
     -fx-background-color: white;
     -fx-padding: 5 30 5 30;
     -fx-background-radius: 8;
     -fx-border-radius: 8;
 }
-#TimelineCardContainer {
+#timelineCardContainer {
     -fx-background-color: white;
     -fx-background-radius: 8;
     -fx-border-radius: 8;

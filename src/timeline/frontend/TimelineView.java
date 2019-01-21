@@ -6,14 +6,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 
 public class TimelineView extends BorderPane {
 
     // Fields for this class
     private FrontCardView frontCardView;
     private BackCardView backCardView;
-    private ControllerInterface timelineController;
+    private NavigatorControllerInterface timelineController;
     // Perifer panes
     private VBox leftPane = new VBox();
     private VBox rightPane = new VBox();
@@ -31,7 +30,7 @@ public class TimelineView extends BorderPane {
         getBackCardView().getView().setOnMouseClicked(event -> getTimelineController().stepOut(frontCardView));
         // Set the borderPane and stackPane. Add stackPane to CENTER
         setStackPane(new StackPane());
-        getStackPane().setId("TimelineCardContainer");
+        getStackPane().setId("timelineCardContainer");
         getStackPane().setMaxSize(1200, 600);
         getStackPane().setMinSize(600, 300);
         getStackPane().setPrefSize(1000, 500);
@@ -75,9 +74,9 @@ public class TimelineView extends BorderPane {
                 getTimelineController().next(getFrontCardView(), getBackCardView());
             }
         });
-        setTimelineController(new TimelineController(getFrontCardView(), getBackCardView(), getStackPane()));
+        setTimelineController(new NavigatorController(getFrontCardView(), getBackCardView(), getStackPane()));
         // Set style id's for timelineview
-        super.setId("TimelineView");
+        super.setId("timelineView");
     }
 
     public FrontCardView getFrontCardView() {
@@ -96,11 +95,11 @@ public class TimelineView extends BorderPane {
         this.backCardView = backCardView;
     }
 
-    public ControllerInterface getTimelineController() {
+    public NavigatorControllerInterface getTimelineController() {
         return timelineController;
     }
 
-    public void setTimelineController(ControllerInterface timelineController) {
+    public void setTimelineController(NavigatorControllerInterface timelineController) {
         this.timelineController = timelineController;
     }
 

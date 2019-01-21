@@ -1,14 +1,31 @@
 package timeline.frontend;
-
 import javafx.scene.control.Label;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-
 import java.util.ArrayList;
 
+/**
+ * FrontCardView is the front card of the navigator. It contains default headers from h1 to h6, a body label
+ * for representing text, a date label for representing date.
+ * This class contains a VBox that represents the actual view/layout of the card. To get the view
+ * use the method getView().
+ *
+ * ID's for this class:
+ * #frontCardH1
+ * #frontCardH2
+ * #frontCardH3
+ * #frontCardH4
+ * #frontCardH5
+ * #frontCardH6
+ * #frontCardBody
+ * #frontCardDate
+ * #frontCardView
+ *
+ * Author: Øyvind Johannessen
+ * Version: 1.0
+ */
 public class FrontCardView {
     // Fields for this class
     private VBox view = new VBox();
@@ -22,7 +39,7 @@ public class FrontCardView {
     private Label body = new Label();
 
     /**
-     * Constructs a cards
+     * Constructs a card with default properties
      */
     public FrontCardView() {
         // Set grow
@@ -43,15 +60,15 @@ public class FrontCardView {
         getBody().setStyle("-fx-padding: 0 50 0 50;");
 
         // Set style id's
-        getView().setId("FrontCardView");
-        getH1().setId("FrontCardH1");
-        getH2().setId("FrontCardH2");
-        getH3().setId("FrontCardH3");
-        getH4().setId("FrontCardH4");
-        getH5().setId("FrontCardH5");
-        getH6().setId("FrontCardH6");
-        getBody().setId("FrontCardBody");
-        getDate().setId("FrontCardDate");
+        getView().setId("frontCardView");
+        getH1().setId("frontCardH1");
+        getH2().setId("frontCardH2");
+        getH3().setId("frontCardH3");
+        getH4().setId("frontCardH4");
+        getH5().setId("frontCardH5");
+        getH6().setId("frontCardH6");
+        getBody().setId("frontCardBody");
+        getDate().setId("frontCardDate");
 
         // Set wrap text on labels
         getH1().setWrapText(true);
@@ -70,6 +87,9 @@ public class FrontCardView {
         getView().getChildren().addAll(top, getH2(), getH3(), getH4(), getH5(), getH6(), getBody());
     }
 
+    /**
+     * Removes unused labels so they don't take up space
+     */
     public void removeUnusedLabels() {
         if(getH1().getText().equals("")) {
             getH1().setManaged(false);
@@ -94,6 +114,10 @@ public class FrontCardView {
         }
     }
 
+    /**
+     * This method is used for creating tags from a list containing strings (tags)
+     * @param tags
+     */
     public void createTags(ArrayList<String> tags) {
         for (String tag : tags) {
             Label tg = new Label(tag);
@@ -103,62 +127,122 @@ public class FrontCardView {
         }
     }
 
+    /**
+     * Returns the actual view of the front card
+     * @return view
+     */
     public VBox getView() {
         return this.view;
     }
 
+    /**
+     * Get the date label
+     * @return date
+     */
     public Label getDate() {
         return date;
     }
 
+    /**
+     * Set the date label
+     * @param date
+     */
     private void setDate(Label date) {
         this.date = date;
     }
 
+    /**
+     * Get the header 1 label
+     * @return h1
+     */
     public Label getH1() {
         return h1;
     }
 
+    /**
+     * Set the header 1 label
+     * @param h1
+     */
     private void setH1(Label h1) {
         this.h1 = h1;
     }
 
+    /**
+     * Get the header 2 label
+     * @return h2
+     */
     public Label getH2() {
         return h2;
     }
 
+    /**
+     * Set the header 2 label
+     * @param h2
+     */
     private void setH2(Label h2) {
         this.h2 = h2;
     }
 
+    /**
+     * Get the header 3 label
+     * @return h3
+     */
     public Label getH3() {
         return h3;
     }
 
+    /**
+     * Set the header 3 label
+     * @param h3
+     */
     private void setH3(Label h3) {
         this.h3 = h3;
     }
 
+    /**
+     * Get the header 4 label
+     * @return
+     */
     public Label getH4() {
         return h4;
     }
 
+    /**
+     * Set the header 4 label
+     * @param h4
+     */
     private void setH4(Label h4) {
         this.h4 = h4;
     }
 
+    /**
+     * Get the header 5 label
+     * @return h5
+     */
     public Label getH5() {
         return h5;
     }
 
+    /**
+     * Set the header 5 label
+     * @param h5
+     */
     private void setH5(Label h5) {
         this.h5 = h5;
     }
 
+    /**
+     * Get the header 6 label
+     * @return h6
+     */
     public Label getH6() {
         return h6;
     }
 
+    /**
+     * Set the header 6 label
+     * @param h6
+     */
     private void setH6(Label h6) {
         this.h6 = h6;
     }
@@ -167,6 +251,10 @@ public class FrontCardView {
         return body;
     }
 
+    /**
+     * Set the body label
+     * @param body
+     */
     private void setBody(Label body) {
         this.body = body;
     }

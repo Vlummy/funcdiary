@@ -1,9 +1,15 @@
 package timeline.frontend;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+
 import java.util.ArrayList;
 
 /**
@@ -42,22 +48,18 @@ public class FrontCardView {
      * Constructs a card with default properties
      */
     public FrontCardView() {
-        // Set grow
-        VBox.setVgrow(getView(), Priority.ALWAYS);
-
         // Set default style
         getView().setStyle("-fx-background-color: white; -fx-padding: 5 30 5 30; -fx-background-radius: 8; -fx-border-radius: 8;");
         getView().setMaxSize(1200, 600);
         getView().setMinSize(600, 300);
         getView().setPrefSize(1000, 500);
-        getView().setSpacing(10);
+        getView().setSpacing(5);
         getH1().setStyle("-fx-font-size: 32");
-        getH2().setStyle("-fx-font-size: 24; -fx-padding: 0 50 0 50;");
-        getH3().setStyle("-fx-font-size: 18; -fx-padding: 0 50 0 50;");
-        getH4().setStyle("-fx-font-size: 16; -fx-padding: 0 50 0 50;");
-        getH5().setStyle("-fx-font-size: 13; -fx-padding: 0 50 0 50;");
-        getH6().setStyle("-fx-font-size: 10; -fx-padding: 0 50 0 50;");
-        getBody().setStyle("-fx-padding: 0 50 0 50;");
+        getH2().setStyle("-fx-font-size: 24;");
+        getH3().setStyle("-fx-font-size: 18;");
+        getH4().setStyle("-fx-font-size: 16;");
+        getH5().setStyle("-fx-font-size: 13;");
+        getH6().setStyle("-fx-font-size: 10;");
 
         // Set style id's
         getView().setId("frontCardView");
@@ -77,14 +79,28 @@ public class FrontCardView {
         getH4().setWrapText(true);
         getH5().setWrapText(true);
         getH6().setWrapText(true);
-        getBody().setWrapText(true);
 
         // Top spacer
         Region topSpacer = new Region();
         HBox.setHgrow(topSpacer, Priority.ALWAYS);
         HBox top = new HBox(getH1(), topSpacer, getDate());
 
-        getView().getChildren().addAll(top, getH2(), getH3(), getH4(), getH5(), getH6(), getBody());
+        getView().getChildren().addAll(top, getH2(), getH3(), getH4(), getH5(), getH6(), addScrollPane(getBody()));
+    }
+
+    /**
+     * Add scrollpane to body
+     */
+    private ScrollPane addScrollPane(Label body) {
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(body);
+        body.setWrapText(true);
+        scrollPane.setStyle("-fx-border-color: white; -fx-border-width: 0.2 0 0 0;");
+        scrollPane.setFitToWidth(true);
+        scrollPane.getStylesheets().add("timeline/frontend/stylesheets/scrollpane.css");
+        VBox.setVgrow(scrollPane, Priority.ALWAYS);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        return scrollPane;
     }
 
     /**
@@ -93,24 +109,38 @@ public class FrontCardView {
     public void removeUnusedLabels() {
         if(getH1().getText().equals("")) {
             getH1().setManaged(false);
+        } else {
+            getH1().setManaged(true);
         }
         if(getH2().getText().equals("")) {
             getH2().setManaged(false);
+        } else {
+            getH2().setManaged(true);
         }
         if(getH3().getText().equals("")) {
             getH3().setManaged(false);
+        } else {
+            getH3().setManaged(true);
         }
         if(getH4().getText().equals("")) {
             getH4().setManaged(false);
+        } else {
+            getH4().setManaged(true);
         }
         if(getH5().getText().equals("")) {
             getH5().setManaged(false);
+        } else {
+            getH5().setManaged(true);
         }
         if(getH6().getText().equals("")) {
             getH6().setManaged(false);
+        } else {
+            getH6().setManaged(true);
         }
         if(getBody().getText().equals("")) {
             getBody().setManaged(false);
+        } else {
+            getBody().setManaged(true);
         }
     }
 
@@ -118,13 +148,15 @@ public class FrontCardView {
      * This method is used for creating tags from a list containing strings (tags)
      * @param tags
      */
-    public void createTags(ArrayList<String> tags) {
+    public ArrayList<Label> createTags(ArrayList<String> tags) {
+        ArrayList<Label> tagLabels = new ArrayList<>();
         for (String tag : tags) {
             Label tg = new Label(tag);
             tg.setWrapText(true);
             tg.getStyleClass().add("Tag");
-            getView().getChildren().add(tg);
+            tagLabels.add(tg);
         }
+        return tagLabels;
     }
 
     /**
@@ -247,12 +279,16 @@ public class FrontCardView {
         this.h6 = h6;
     }
 
+    /**
+     * Get the body text
+     * @return
+     */
     public Label getBody() {
         return body;
     }
 
     /**
-     * Set the body label
+     * Set the body text
      * @param body
      */
     private void setBody(Label body) {

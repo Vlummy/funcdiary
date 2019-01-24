@@ -14,12 +14,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("client/Diary.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("client/diary.fxml"));
         // Make transparent screen draggable
         draggable.makeDraggable(primaryStage, root);
-
         Scene landingPage = new Scene(root);
-
 
         primaryStage.initStyle(StageStyle.TRANSPARENT);
 
@@ -28,7 +26,6 @@ public class Main extends Application {
         primaryStage.setTitle("Your Functional Diary");
         primaryStage.setScene(landingPage);
         primaryStage.show();
-
     }
 
 

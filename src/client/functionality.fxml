@@ -2,6 +2,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.Group?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <BorderPane fx:id="fBorderPane" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="client.FuncController"
@@ -34,8 +36,8 @@
             <center>
                 <VBox alignment="CENTER" style="-fx-border-width: 0 0 0 1; -fx-border-color: #4d4d4d">
                     <HBox alignment="CENTER">
-                        <TextField fx:id="chartYearField" promptText="Enter year..." onKeyTyped="#validateNumbers" />
-                        <Button text="Update" onAction="#createMonthAverageAxis" />
+                        <JFXTextField fx:id="chartYearField" promptText="Enter year..." onKeyTyped="#validateNumbers" />
+                        <JFXButton text="Update" onAction="#createMonthAverageAxis" />
                     </HBox>
                     <Group fx:id="lineChartContainer" />
                 </VBox>

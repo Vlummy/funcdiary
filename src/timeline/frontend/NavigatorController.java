@@ -81,10 +81,15 @@ public class NavigatorController implements NavigatorControllerInterface {
         frontCardView.getH3().setText(day.getPersonalExperience());
         frontCardView.getH4().setText(day.getKnowledgeObtained());
         frontCardView.getBody().setText(day.getRecapStory());
-        backCardView.setImage1(new Image(day.getImageOne()));
-        backCardView.setImage2(new Image(day.getImageTwo()));
-        backCardView.setImageRotation1(day.getImageOneRotation());
-        backCardView.setImageRotation2(day.getImageTwoRotation());
+        frontCardView.removeUnusedLabels();
+        try {
+            backCardView.setImage1(new Image(day.getImageOne()));
+            backCardView.setImage2(new Image(day.getImageTwo()));
+            backCardView.setImageRotation1(day.getImageOneRotation());
+            backCardView.setImageRotation2(day.getImageTwoRotation());
+        } catch (Exception e) {
+            System.out.println("There are noe images");
+        }
     }
 
     @Override

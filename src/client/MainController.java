@@ -1,5 +1,5 @@
 package client;
-
+import com.jfoenix.controls.JFXButton;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.concurrent.Task;
@@ -11,20 +11,15 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import server.*;
-import timeline.backend.Timeline;
-import timeline.frontend.BackCardView;
-import timeline.frontend.FrontCardView;
-import timeline.frontend.TimelineFactory;
 import timeline.frontend.TimelineView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Optional;
 
 import static server.SaveLoadObjectsToFile.loadObject;
@@ -70,7 +65,9 @@ public class MainController implements Controller {
      * Initialize the scene
      */
     public void initialize() {
-        this.tagsList = new ArrayList<>();
+        if(this.tagsList == null) {
+            this.tagsList = new ArrayList<>();
+        }
         tagTextField.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.ENTER) {
                 addTagToCurrentDay(tagsCollectionPane, tagTextField.getText());
@@ -90,6 +87,32 @@ public class MainController implements Controller {
 
         saveButton.setTooltip(new Tooltip("Saves your day to the selected date"));
         tagTextField.setTooltip(new Tooltip("Write your tag and press Enter"));
+
+        // Make tag cloud on button click
+        JFXButton tagCloudButton = new JFXButton("View Tags");
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        timelineView.getTopPane().setStyle("-fx-padding: 10");
+        timelineView.getTopPane().getChildren().addAll(spacer, tagCloudButton);
+        tagCloudButton.setOnAction(event -> {
+            new TagCloudViewer(tagCloudButton, getTagsForTagCloudViewer());
+        });
+    }
+
+    /**
+     * Get tags from the current loaded day in the CardNavigator
+     * @return Label -- a list of tags
+     */
+    public ArrayList<Label> getTagsForTagCloudViewer() {
+        DaysCollection daysCollection = null;
+        try {
+            daysCollection = (DaysCollection) SaveLoadObjectsToFile.loadObject("daysCollection.ser");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        HashMap<String, Day> days = daysCollection.getDayCollection();
+        Day day = days.get(timelineView.getFrontCardView().getDate().getText());
+        return timelineView.getFrontCardView().createTags(day.getTags());
     }
 
     /**

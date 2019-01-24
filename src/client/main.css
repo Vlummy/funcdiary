@@ -1,22 +1,39 @@
-/* ROOT */
-.root, .menu-bar, .tab-pane, .tab-header-background {
-    -fx-background-color: #4d4d4d;
-    -fx-fill: white;
+/*!* ROOT *!*/
+.root {
+    -fx-padding: 50;
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 0);
+}
+
+.jfx-button {
+    -fx-background-color: #536a74;
+    -fx-text-fill: #d0d6d9;
+}
+
+.jfx-button:hover {
+    -fx-background-color: #d0d6d9;
+    -fx-text-fill: #536a74;
+}
+
+.MenuButtons {
+    -fx-max-width: 600;
+    -fx-text-alignment: center;
+    -fx-font-size: 24;
 }
 
 /* TimelineView style */
 #timelineView {
-    -fx-background-color: #99B5BE;
+    /*-fx-background-color: transparant;*/
 }
 #frontCardView {
-    -fx-background-color: white;
+    -fx-background-color: #252f33;
     -fx-padding: 5 30 5 30;
     -fx-background-radius: 8;
     -fx-border-radius: 8;
     -fx-text-fill: white;
 }
 #backCardView {
-    -fx-background-color: white;
+    -fx-background-color: #252f33;
     -fx-padding: 5 30 5 30;
     -fx-background-radius: 8;
     -fx-border-radius: 8;
@@ -28,211 +45,57 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
 
-.button {
-    -fx-background-color: #99B5BE;
-    -fx-text-fill: white;
-    -fx-background-radius: 2;
+#frontCardH1, #frontCardH2, #frontCardH3, #frontCardH4, #frontCardH5, #frontCardH6, #frontCardBody, #frontCardDate {
+    -fx-text-fill: #d0d6d8;
 }
 
-.button:hover {
-    -fx-background-color: #4d4d4d;
+#frontCardH1 {
+    -fx-font-weight: bold;
 }
 
-/* TAB PANE */
-.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
-    -fx-border-style: none;
-    -fx-border-color: none;
+/* TabPane */
+.jfx-tab-pane .headers-region {
+    -fx-background-color: #536a74;
+}
+.jfx-tab-pane .tab-header-background {
+    -fx-background-color: #536a74;
+}
+.jfx-tab-pane .tab-selected-line {
+    -fx-stroke: #536a74;
+    -fx-stroke-width: 3pt;
 }
 
-.TabPaneContainer {
-    -fx-border-width: 0 1 1 1;
-    -fx-border-color: #4d4d4d;
-    -fx-padding: 5;
-    -fx-background-color: #99B5BE;
+/* Date Picker */
+.jfx-date-picker > .arrow-button > .jfx-svg-glyph {
+    -fx-background-color: #536a74;
 }
 
-.tab-label {
-    -fx-text-fill: white;
-}
-
-.tab {
-    -fx-background-color: #99B5BE;
-    -fx-text-fill: white;
-}
-
-.tab:selected {
-    -fx-background-color: #999999;
-}
-
-/* MENUBAR */
-.MenuBar {
-    -fx-border-width: 1 1 0 1;
-    -fx-border-color: #4d4d4d;
-}
-
-.MenuBarButtons {
-    -fx-background-color: #99B5BE;
-    -fx-background-radius: 0;
-    -fx-border-radius: 0;
-}
-
-.MenuBarButtons:hover {
-    -fx-background-color: #4d4d4d;
-}
-
-.menu-item:focused {
-    -fx-background-color: #99B5BE;
-}
-
-.menu-item:focused .label {
-    -fx-text-fill: white;
-}
-
-.context-menu {
-    -fx-background-color: #4d4d4d;
-}
-
-.menu-bar {
-    -fx-background-color: #99B5BE;
-}
-
-.menu-bar .menu-button {
-    -fx-background-color: #99B5BE;
-}
-
-.menu-bar .menu-button:hover {
-    -fx-background-color: #4d4d4d;
-    -fx-text-fill: white;
-}
-
-.menu-button:hover .label {
-    -fx-text-fill: white;
-}
-
-.menu-button .label {
-    -fx-text-fill: #4d4d4d;
-}
-
-/* Editor Containter */
-#editorContainer {
-    -fx-border-color: #4d4d4d;
-    -fx-border-width: 0 1 0 1;
-    -fx-padding: 0 5 0 5;
-}
-
-/* Bottom Layout */
-#bottomLayout {
-    -fx-border-color: #4d4d4d;
-    -fx-border-width: 1 0 0 0;
-    -fx-padding: 5;
-}
-
-/* IMAGE CONTAINERS */
-.imageContainer {
-
-}
-
-.LabelSize14 {
-    -fx-font-size: 14px;
-    -fx-padding: 5px;
-    -fx-text-fill: #ddd;
-}
-
-.date-picker {
-    -fx-background-color: #99B5BE;
-    -fx-border-color: white;
-    -fx-border-radius: 3;
-    -fx-background-radius: 3;
-    -fx-border-width: 0 0 0 0;
-    -fx-text-fill: white;
-}
-
-.date-picker-popup {
-    -fx-background-color: #99B5BE;
-    -fx-border-color: white;
-    -fx-border-radius: 3;
-}
-
-
-.date-picker-popup .cell{
-    -fx-background-color: #99B5BE;
-    -fx-text-fill: white;
-}
-
-.date-picker-popup > * > .today {
-    -fx-background-color: #99B5BE;
-    -fx-background-insets: 1, 2, 3;
+.date-picker-popup > .month-year-pane {
+    -fx-background-color: #536a74;
 }
 
 .date-picker-popup .button {
-    -fx-background-color: #8EB0BB;
+    -fx-background-color: rgba(0,0,0,0);
 }
 
-.date-picker-popup .button:hover {
-    -fx-background-color: #8EB0BB;
+/* TextField, TextArea, Label */
+.jfx-text-field {
+    -fx-font-size: 18;
+    -fx-text-fill: #795c51;
+    -jfx-focus-color: #795c51;
+    -jfx-unfocus-color: #b1bfbd;
+    -fx-padding: 0.333333em 0 0.333333em 0;
 }
 
-.date-picker-popup .month-year-pane {
-    -fx-background-color: #7AA3B1;
+.jfx-text-area {
+    -fx-font-size: 18;
+    -fx-text-fill: #795c51;
+    -jfx-focus-color: #795c51;
+    -jfx-unfocus-color: #b1bfbd;
+    -fx-padding: 0.333333em 0 0 0 ;
 }
 
-.date-picker-popup > * > .day-cell:hover,
-.date-picker-popup > * > .selected,
-.date-picker-popup > * > .previous-month.selected,
-.date-picker-popup > * > .next-month.selected {
-    -fx-background: -fx-selection-bar;
-    -fx-background-color: #7AA3B1;
-}
-
-.date-picker > .arrow-button {
-    -fx-background-color: #99B5BE;
-    -fx-background-radius: 3px;
-    -fx-border-width: 0 0 1 0;
-    -fx-border-color: white;
-}
-
-.date-picker > .arrow-button > .arrow {
-    -fx-background-color: white;
-}
-
-.date-picker-popup > .calendar-grid {
-    -fx-background-color: #7AA3B1;
-    -fx-padding: 10;
-}
-
-/*
-*/
-.text-field {
-    -fx-background-color: #99B5BE;
-    -fx-border-color: white;
-    -fx-border-width: 0 0 1 0;
-    -fx-background-radius: 3;
-    -fx-text-fill: white;
-    -fx-prompt-text-fill: white;
-}
-
-.text-area {
-    -fx-background-color: #99B5BE;
-    -fx-text-fill: white;
-    -fx-prompt-text-fill: white;
-
-}
-
-.text-area .scroll-pane {
-    -fx-background-color: transparent;
-}
-
-.text-area .scroll-pane .viewport{
-    -fx-background-color: transparent;
-}
-
-
-.text-area .scroll-pane .content{
-    -fx-background-color: #99B5BE;
-    -fx-border-radius: 3;
-    -fx-background-radius: 3;
-}
-
-.imageContainer {
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+.label {
+    -fx-font-size: 18;
+    -fx-text-fill: #795c51;
 }

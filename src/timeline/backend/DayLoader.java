@@ -221,7 +221,7 @@ public class DayLoader implements LoaderInterface<Day, LocalDate> {
                 try {
                     this.previousDate = getDaysList().get(i - 1).getDate();
                 } catch (IndexOutOfBoundsException e) {
-                    // Do nothing, and keep previous date as null
+                    this.previousDate = null;
                 }
             }
         }
@@ -246,7 +246,7 @@ public class DayLoader implements LoaderInterface<Day, LocalDate> {
                 try {
                     this.nextDate = getDaysList().get(i + 1).getDate();
                 } catch (IndexOutOfBoundsException e) {
-                    // Do nothing, and keep next date as null
+                    this.nextDate = null;
                 }
             }
         }

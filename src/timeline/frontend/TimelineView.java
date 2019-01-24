@@ -67,7 +67,7 @@ public class TimelineView extends BorderPane {
         // Add ActionEvent listener
         iconLeft.setOnMouseClicked(event -> getTimelineController().previous(getFrontCardView(), getBackCardView()));
         iconRight.setOnMouseClicked(event -> getTimelineController().next(getFrontCardView(), getBackCardView()));
-        super.setOnScroll((ScrollEvent event) -> {
+        getFrontCardView().getView().setOnScroll((ScrollEvent event) -> {
             if(event.getDeltaY() > 0) {
                 getTimelineController().previous(getFrontCardView(), getBackCardView());
             } else if(event.getDeltaY() < 0) {
@@ -75,8 +75,6 @@ public class TimelineView extends BorderPane {
             }
         });
         setTimelineController(new NavigatorController(getFrontCardView(), getBackCardView(), getStackPane()));
-        // Set style id's for timelineview
-        super.setId("timelineView");
     }
 
     public FrontCardView getFrontCardView() {

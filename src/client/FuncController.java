@@ -12,6 +12,7 @@ import server.DaysCollection;
 import server.SaveLoadObjectsToFile;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.time.Month;
 import java.util.Calendar;
 
@@ -110,7 +111,9 @@ public class FuncController implements Controller {
 
         // Calculate the average ratings of the days
         if(!collection.getDayCollection().isEmpty()) {
-            this.daysAvg.setText(Double.toString(DayCalculator.average(collection)));
+            DecimalFormat decimalFormat = new DecimalFormat(".##");
+            double avg = Double.parseDouble(decimalFormat.format(DayCalculator.average(collection)));
+            this.daysAvg.setText(Double.toString(avg));
         }
     }
 }

@@ -18,6 +18,7 @@ import javafx.util.Duration;
 import server.*;
 import timeline.frontend.TimelineView;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
@@ -90,13 +91,26 @@ public class MainController implements Controller {
 
         // Make tag cloud on button click
         JFXButton tagCloudButton = new JFXButton("View Tags");
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
+        Region spacerTop = new Region();
+        HBox.setHgrow(spacerTop, Priority.ALWAYS);
         timelineView.getTopPane().setStyle("-fx-padding: 10");
-        timelineView.getTopPane().getChildren().addAll(spacer, tagCloudButton);
+        timelineView.getBottomPane().setStyle("-fx-padding: 10");
+        timelineView.getTopPane().getChildren().addAll(spacerTop, tagCloudButton);
         tagCloudButton.setOnAction(event -> {
             new TagCloudViewer(tagCloudButton, getTagsForTagCloudViewer());
         });
+    }
+
+    public void setTimelineViewRate(Label rateLabel) {
+        try {
+            DaysCollection daysCollection = (DaysCollection) SaveLoadObjectsToFile.loadObject("daysCollection.ser");
+            HashMap<String, Day> map = daysCollection.getDayCollection();
+            String rate = map.get(timelineView.getFrontCardView().getDate().getText()).getRating() + "";
+            System.out.println(rate);
+            rateLabel.setText(rate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

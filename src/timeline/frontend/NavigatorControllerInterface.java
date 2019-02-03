@@ -2,6 +2,8 @@ package timeline.frontend;
 
 import javafx.scene.layout.StackPane;
 
+import java.time.LocalDate;
+
 /**
  * NavigatorControllerInterface is the method signatures that is used for controlling a
  * CardNavigator.
@@ -30,6 +32,13 @@ public interface NavigatorControllerInterface {
      * @param backCardView
      */
     void previous(FrontCardView frontCardView, BackCardView backCardView);
+
+    /**
+     * Loads specific date card
+     * @param frontCardView
+     * @param backCardView
+     */
+    void specific(LocalDate identifier, FrontCardView frontCardView, BackCardView backCardView);
 
     /**
      * This method is used to step in to the front card and view the back card

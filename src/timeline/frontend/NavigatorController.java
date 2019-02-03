@@ -73,6 +73,12 @@ public class NavigatorController implements NavigatorControllerInterface {
         }
     }
 
+    @Override
+    public void specific(LocalDate date, FrontCardView frontCardView, BackCardView backCardView) {
+        getTimeline().getLoader().loadSpecificEntry(date);
+        createCards(frontCardView, backCardView);
+    }
+
     private void createCards(FrontCardView frontCardView, BackCardView backCardView) {
         Day day = (Day) getTimeline().getLoader().getEntry();
         frontCardView.getDate().setText(day.getDate().toString());
@@ -80,6 +86,7 @@ public class NavigatorController implements NavigatorControllerInterface {
         frontCardView.getH2().setText(day.getCrucialExperience());
         frontCardView.getH3().setText(day.getPersonalExperience());
         frontCardView.getH4().setText(day.getKnowledgeObtained());
+        frontCardView.getH5().setText("Rate: " + day.getRating());
         frontCardView.getBody().setText(day.getRecapStory());
         frontCardView.removeUnusedLabels();
         try {

@@ -18,6 +18,7 @@ import javafx.util.Duration;
 import server.*;
 import timeline.frontend.TimelineView;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -199,17 +200,19 @@ public class MainController implements Controller {
 
     public void selectImageOne() {
         ImageFileChooser imageFileChooser = new ImageFileChooser(new FileChooser(), new Stage());
-        Image image = new Image(imageFileChooser.getTargetPath().toString());
+        //String path = "img/" + imageFileChooser.getFile().getName();
+        Image image = new Image(imageFileChooser.getFile().toURI().toString());
         setImageViewOne(image);
-        this.imageOnePath = imageFileChooser.getTargetPath().toString();
+        this.imageOnePath = imageFileChooser.getFile().toURI().toString();
 
     }
 
     public void selectImageTwo() {
         ImageFileChooser imageFileChooser = new ImageFileChooser(new FileChooser(), new Stage());
-        Image image = new Image(imageFileChooser.getTargetPath().toString());
+        //String path = "img/" + imageFileChooser.getFile().getName();
+        Image image = new Image(imageFileChooser.getFile().toURI().toString());
         setImageViewTwo(image);
-        this.imageTwoPath = imageFileChooser.getTargetPath().toString();
+        this.imageTwoPath = imageFileChooser.getFile().toURI().toString();
     }
 
     public void resetImageViews() {

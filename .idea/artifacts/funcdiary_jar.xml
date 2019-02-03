@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="funcdiary:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/funcdiary_jar</output-path>
+    <root id="archive" name="funcdiary.jar">
+      <element id="module-output" name="funcdiary" />
+      <element id="extracted-dir" path="D:/codeSnippiings/JavaFX-libraries/jfoenixadmin_JFoenix_ JavaFX Material Design Library_files/jfoenix-8.0.8.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

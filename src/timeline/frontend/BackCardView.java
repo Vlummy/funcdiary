@@ -3,6 +3,8 @@ import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 
 /**
  * BackCardView is the the card that lies behind FrontCardView. It can contains two images.
@@ -43,12 +45,18 @@ public class BackCardView {
         getImageView1().setPreserveRatio(true);
         getImageView2().setPreserveRatio(true);
         // Add ImageViews to HBox
-        getView().getChildren().addAll(getImageView1(), getImageView2());
+        Region spacer1 = new Region();
+        Region spacer2 = new Region();
+        Region spacer3 = new Region();
+        HBox.setHgrow(spacer1, Priority.ALWAYS);
+        HBox.setHgrow(spacer2, Priority.ALWAYS);
+        HBox.setHgrow(spacer3, Priority.ALWAYS);
+        getView().getChildren().addAll(spacer1, getImageView1(), spacer2, getImageView2(), spacer3);
         getView().setAlignment(Pos.CENTER);
-        getImageView1().setFitWidth(500);
-        getImageView1().setFitHeight(500);
-        getImageView2().setFitWidth(500);
-        getImageView2().setFitHeight(500);
+        getImageView1().setFitWidth(450);
+        getImageView1().setFitHeight(450);
+        getImageView2().setFitWidth(450);
+        getImageView2().setFitHeight(450);
     }
 
     /**

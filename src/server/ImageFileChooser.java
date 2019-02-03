@@ -21,24 +21,24 @@ public class ImageFileChooser {
         this.fileChooser = fileChooser;
         setExtensionFilters(fileChooser);
 
-        this.file = fileChooser.showOpenDialog(stage);
+        this.setFile(fileChooser.showOpenDialog(stage));
 
-        moveSelectedFileToResourceFolder();
+        //moveSelectedFileToResourceFolder();
 
     }
 
-    public void moveSelectedFileToResourceFolder() {
+    /*public void moveSelectedFileToResourceFolder() {
         // Move selected file to resource folder
-        if(file != null) {
-            Path moveFrom = FileSystems.getDefault().getPath(file.getPath());
-            this.target = Paths.get("src","resources/" + file.getName());
+        if(getFile() != null) {
+            Path moveFrom = FileSystems.getDefault().getPath(getFile().getPath());
+            this.target = Paths.get("img/" + getFile().getName());
             try {
                 Files.copy(moveFrom, getTargetPath());
             } catch (IOException e) {
 
             }
         }
-    }
+    }*/
 
     private void setExtensionFilters(FileChooser fileChooser) {
         // Set the extension filter to img files
@@ -51,5 +51,21 @@ public class ImageFileChooser {
 
     public Path getTargetPath() {
         return target;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    public FileChooser getFileChooser() {
+        return fileChooser;
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 }

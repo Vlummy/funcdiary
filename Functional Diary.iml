@@ -19,6 +19,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="jdk1.8" level="application" />
-    <orderEntry type="library" name="jfoenix-8.0.8" level="project" />
+    <orderEntry type="library" name="jfoenix-8.0.8" level="application" />
   </component>
 </module>

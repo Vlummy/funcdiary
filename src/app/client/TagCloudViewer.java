@@ -1,4 +1,4 @@
-package client;
+package app.client;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;

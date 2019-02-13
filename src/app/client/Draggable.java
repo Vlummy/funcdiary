@@ -1,4 +1,4 @@
-package client;
+package app.client;
 
 import javafx.scene.Parent;
 import javafx.stage.Stage;

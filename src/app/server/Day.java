@@ -1,6 +1,4 @@
-package server;
-
-import javafx.scene.image.Image;
+package app.server;
 
 import java.io.Serializable;
 import java.time.LocalDate;

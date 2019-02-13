@@ -16,8 +16,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.Image?>
-<?import timeline.frontend.TimelineView?>
-<?import timeline.frontend.TimelineFactory?>
+<?import app.timeline.frontend.TimelineView?>
+<?import app.timeline.frontend.TimelineFactory?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import com.jfoenix.controls.JFXButton?>
@@ -26,7 +26,7 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.AnchorPane?>
-<BorderPane styleClass="PaneStandardStyle" fx:id="diaryBorderPane" fx:controller="client.MainController" xmlns:fx="http://javafx.com/fxml" stylesheets="@main.css">
+<BorderPane styleClass="PaneStandardStyle" fx:id="diaryBorderPane" fx:controller="app.client.MainController" xmlns:fx="http://javafx.com/fxml" stylesheets="@main.css">
     <fx:define>
         <Screen fx:factory="getPrimary" fx:id="screen" />
     </fx:define>

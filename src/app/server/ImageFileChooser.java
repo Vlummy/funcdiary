@@ -1,10 +1,9 @@
-package server;
+package app.server;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.*;
 
 public class ImageFileChooser {

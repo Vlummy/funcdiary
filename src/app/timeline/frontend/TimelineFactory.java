@@ -1,9 +1,7 @@
-package timeline.frontend;
-
-import javafx.scene.layout.BorderPane;
+package app.timeline.frontend;
 
 /**
- * TimelineFactory: Creates a timeline instance
+ * TimelineFactory: Creates a app.timeline instance
  * Example: <TimelineFactory fx:factory: "instance" />
  * Author: Øyvind Johannessen
  * Version: 1.0

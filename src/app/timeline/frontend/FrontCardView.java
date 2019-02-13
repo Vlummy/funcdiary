@@ -1,14 +1,10 @@
-package timeline.frontend;
+package app.timeline.frontend;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
 
@@ -97,7 +93,7 @@ public class FrontCardView {
         body.setWrapText(true);
         scrollPane.setStyle("-fx-border-color: white; -fx-border-width: 0.2 0 0 0;");
         scrollPane.setFitToWidth(true);
-        scrollPane.getStylesheets().add("timeline/frontend/stylesheets/scrollpane.css");
+        scrollPane.getStylesheets().add("app/timeline/frontend/stylesheets/scrollpane.css");
         VBox.setVgrow(scrollPane, Priority.ALWAYS);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         return scrollPane;

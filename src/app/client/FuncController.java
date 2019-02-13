@@ -1,4 +1,4 @@
-package client;
+package app.client;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,9 +7,9 @@ import javafx.scene.Group;
 import javafx.scene.chart.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import server.DayCalculator;
-import server.DaysCollection;
-import server.SaveLoadObjectsToFile;
+import app.server.DayCalculator;
+import app.server.DaysCollection;
+import app.server.SaveLoadObjectsToFile;
 
 import java.io.File;
 import java.text.DecimalFormat;

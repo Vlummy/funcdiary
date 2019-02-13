@@ -1,4 +1,4 @@
-package timeline.frontend;
+package app.timeline.frontend;
 
 import javafx.scene.layout.StackPane;
 

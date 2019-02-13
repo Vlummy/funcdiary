@@ -1,4 +1,4 @@
-package server;
+package app.server;
 
 public class DayFactory {
     public static Day createDay(DayType type) {

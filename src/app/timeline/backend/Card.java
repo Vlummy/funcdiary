@@ -1,4 +1,4 @@
-package timeline.backend;
+package app.timeline.backend;
 
 import java.util.ArrayList;
 

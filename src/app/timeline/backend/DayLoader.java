@@ -1,6 +1,6 @@
-package timeline.backend;
+package app.timeline.backend;
 
-import server.Day;
+import app.server.Day;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -9,7 +9,7 @@ import java.util.*;
  * Domain spesific class for this app (Functional Diary)
  * This class takes in a ArrayList that contains days from the Day class and sets the different fields needed
  * to always keep track of the current, previous and next date in line when scrolling through the
- * the cards a timeline displays.
+ * the cards a app.timeline displays.
  *
  * This class implements LoaderInterface to handle the main controls of loading and updating these
  * fields in a correct manner.

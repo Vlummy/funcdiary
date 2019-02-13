@@ -1,7 +1,7 @@
-package timeline.backend;
+package app.timeline.backend;
 
 /**
- * This class is a client Interface for the Timeline.
+ * This class is a app.client Interface for the Timeline.
  * It has the responsibility of managing the components of a Timeline. this can the Loader and the Cards.
  * Author: Øyvind Johannessen
  * Version: 1.0

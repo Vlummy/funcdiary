@@ -1,4 +1,4 @@
-package timeline.frontend;
+package app.timeline.frontend;
 
 import javafx.animation.*;
 import javafx.scene.Node;

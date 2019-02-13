@@ -1,4 +1,4 @@
-package timeline.frontend;
+package app.timeline.frontend;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

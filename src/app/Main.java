@@ -1,13 +1,13 @@
-import client.Draggable;
+package app;
+
+import app.client.Draggable;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import server.ImageFileChooser;
 
 public class Main extends Application {
     private Draggable draggable = new Draggable();

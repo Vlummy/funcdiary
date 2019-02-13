@@ -6,7 +6,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <BorderPane fx:id="fBorderPane" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="client.FuncController"
+            fx:controller="app.client.FuncController"
             prefHeight="400.0" prefWidth="600.0"
             styleClass="TabPaneContainer">
 

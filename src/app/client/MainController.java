@@ -1,4 +1,4 @@
-package client;
+package app.client;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
@@ -15,17 +15,15 @@ import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import server.*;
-import timeline.frontend.TimelineView;
+import app.server.*;
+import app.timeline.frontend.TimelineView;
 
-import java.io.File;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
-import static server.SaveLoadObjectsToFile.loadObject;
-import static server.SaveLoadObjectsToFile.saveObject;
+import static app.server.SaveLoadObjectsToFile.loadObject;
+import static app.server.SaveLoadObjectsToFile.saveObject;
 
 /**
  * Class: MainController
@@ -162,10 +160,10 @@ public class MainController implements Controller {
 
     private void setTheRotateButtons() {
         rotateImageOne = new Button();
-        rotateImageOne.setGraphic(new ImageView(new Image("resources/rotate-icon.png")));
+        rotateImageOne.setGraphic(new ImageView(new Image("app/resources/rotate-icon.png")));
         rotateImageOne.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
         rotateImageTwo = new Button();
-        rotateImageTwo.setGraphic(new ImageView(new Image("resources/rotate-icon.png")));
+        rotateImageTwo.setGraphic(new ImageView(new Image("app/resources/rotate-icon.png")));
         rotateImageTwo.setStyle("-fx-background-color: rgba(0, 0, 0, 0)");
 
         imageContainerOne.getChildren().add(rotateImageOne);

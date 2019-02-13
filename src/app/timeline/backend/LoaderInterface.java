@@ -1,4 +1,4 @@
-package timeline.backend;
+package app.timeline.backend;
 
 /**
  * LoaderInterface is used to check if entries is available, load newest entry, load a spesific entry, load previous

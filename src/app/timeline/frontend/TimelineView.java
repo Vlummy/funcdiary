@@ -1,4 +1,4 @@
-package timeline.frontend;
+package app.timeline.frontend;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -20,7 +20,7 @@ public class TimelineView extends BorderPane {
     private HBox bottomPane = new HBox();
     // Center pane
     private StackPane stackPane;
-    // Main Layout
+    // app.Main Layout
 
     public TimelineView(FrontCardView frontCardView, BackCardView backCardView) {
         // Set dependencies
@@ -57,11 +57,11 @@ public class TimelineView extends BorderPane {
         getStackPane().getChildren().addAll(getBackCardView().getView(), getFrontCardView().getView());
         // Left and right panes construction
         Label iconRight = new Label();
-        iconRight.setGraphic(new ImageView(new Image("timeline/frontend/icons/arrow-right.png")));
+        iconRight.setGraphic(new ImageView(new Image("app/timeline/frontend/icons/arrow-right.png")));
         getRightPane().getChildren().add(iconRight);
         getRightPane().setAlignment(Pos.CENTER);
         Label iconLeft = new Label();
-        iconLeft.setGraphic(new ImageView(new Image("timeline/frontend/icons/arrow-left.png")));
+        iconLeft.setGraphic(new ImageView(new Image("app/timeline/frontend/icons/arrow-left.png")));
         getLeftPane().getChildren().add(iconLeft);
         getLeftPane().setAlignment(Pos.CENTER);
         // Add ActionEvent listener

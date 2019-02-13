@@ -1,18 +1,18 @@
-package timeline.frontend;
+package app.timeline.frontend;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
-import server.Day;
-import server.DaysCollection;
-import server.SaveLoadObjectsToFile;
-import timeline.backend.Card;
-import timeline.backend.DayLoader;
-import timeline.backend.LoaderInterface;
-import timeline.backend.Timeline;
+import app.server.Day;
+import app.server.DaysCollection;
+import app.server.SaveLoadObjectsToFile;
+import app.timeline.backend.Card;
+import app.timeline.backend.DayLoader;
+import app.timeline.backend.LoaderInterface;
+import app.timeline.backend.Timeline;
 import java.time.LocalDate;
 import java.util.HashMap;
 
 /**
- * NavigatorController controls the timeline
+ * NavigatorController controls the app.timeline
  * VIKTIG! DENNE MÅ REFAKTORERES OG GJØRES MED GENERELL
  *
  */

@@ -1,4 +1,4 @@
-package server;
+package app.server;
 
 import java.time.Month;
 import java.util.Map;
